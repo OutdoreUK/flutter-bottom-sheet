@@ -31,7 +31,7 @@ void main() {
       initHeight: initHeight ?? 0.5,
       maxHeight: maxHeight ?? 0.8,
       context: savedContext,
-      builder: (context, controller, offset) {
+      builder: (context, dragController, controller, offset) {
         return ListView(
           key: listViewKey,
           shrinkWrap: true,

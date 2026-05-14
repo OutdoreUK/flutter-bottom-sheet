@@ -63,7 +63,7 @@ void main() {
       isSafeArea: isSafeArea ?? false,
       isModal: isModal ?? true,
       barrierColor: barrierColor,
-      builder: (context, controller, offset) {
+      builder: (context, dragController, controller, offset) {
         return ListView(
           key: listViewKey,
           controller: controller,

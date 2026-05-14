@@ -29,6 +29,7 @@ import 'package:flutter/rendering.dart';
 /// [bottomSheetOffset] - fractional value of offset.
 typedef FlexibleDraggableScrollableWidgetBuilder = Widget Function(
   BuildContext context,
+  DraggableScrollableController draggableScrollController,
   ScrollController scrollController,
   double bottomSheetOffset,
 );
@@ -402,6 +403,7 @@ class _FlexibleBottomSheetState<T> extends State<FlexibleBottomSheet<T>> {
                       ? _controller.size
                       : widget.initHeight,
                   scrollController: controller,
+                  draggableScrollController: _controller,
                   cacheExtent: _calculateCacheExtent(
                     MediaQuery.viewInsetsOf(context).bottom,
                   ),
@@ -472,12 +474,14 @@ class _Content extends StatefulWidget {
   final double? maxHeaderHeight;
   final double currentExtent;
   final ScrollController scrollController;
+  final DraggableScrollableController draggableScrollController;
   final Function(double)? getContentHeight;
   final double cacheExtent;
 
   const _Content({
     required this.currentExtent,
     required this.scrollController,
+    required this.draggableScrollController,
     required this.cacheExtent,
     this.builder,
     this.decoration,
@@ -520,6 +524,7 @@ class _ContentState extends State<_Content> {
             key: _contentKey,
             child: widget.builder!(
               context,
+              widget.draggableScrollController,
               widget.scrollController,
               widget.currentExtent,
             ),
